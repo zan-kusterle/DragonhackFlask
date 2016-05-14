@@ -21,7 +21,7 @@ def create_challenge():
     )
     challenge.save()
 
-    return '', 201
+    return jsonify(serializers.serialize_challenge(challenge)), 201
 
 
 @app.route('/challenges', methods=['GET'])
@@ -51,7 +51,7 @@ def create_result():
     )
     result.save()
 
-    return '', 201
+    return jsonify(serializers.serialize_result(result)), 201
 
 
 @app.route('/results', methods=['GET'])

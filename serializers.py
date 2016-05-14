@@ -1,5 +1,6 @@
 def serialize_result(r):
     return {
+        'challenge_id': r.challenge_id,
         'user_id': r.user_id,
         'score': r.score,
         'scores_by_time': r.scores_by_time
