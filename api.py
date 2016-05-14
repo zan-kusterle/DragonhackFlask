@@ -1,6 +1,7 @@
 import mongoengine
 from flask import Flask, request, jsonify
 
+import serializers
 from models.challenge import Challenge
 from models.result import Result
 
@@ -29,7 +30,7 @@ def get_challenges():
 
     challenges = Challenge.objects(to_user_id=to_user_id)
 
-    return jsonify(challenges=challenges), 200
+    return jsonify(challenges=[serializers.serialize_challenge(c) for c in challenges]), 200
 
 
 @app.route('/results', methods=['POST'])
@@ -52,7 +53,7 @@ def get_results():
 
     results = Result.objects(user_id=user_id)
 
-    return jsonify(results=results), 200
+    return jsonify(results=[serializers.serialize_result(r) for r in results]), 200
 
 
 if __name__ == '__main__':
