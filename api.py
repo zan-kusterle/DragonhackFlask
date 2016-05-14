@@ -37,7 +37,14 @@ def get_challenges():
 def create_result():
     data = request.json
 
+    result = Result.objects.get(
+        challenge_id=data['challenge_id'],
+        user_id=data['user_id']
+    )
+    if result:
+        result.delete()
     result = Result(
+        challenge_id=data['challenge_id'],
         user_id=data['user_id'],
         score=data['score'],
         scores_by_time=data['scores_by_time']
